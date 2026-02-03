@@ -1,0 +1,65 @@
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.file-upload-label {
+    display: block;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border: 2px dashed #6b4423;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.file-upload-label:hover {
+    background: #f0f0f0;
+    border-color: #3f2e1f;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-upload-text {
+    color: #6b4423;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.file-help {
+    color: #999;
+    font-size: 0.85rem;
+    text-align: center;
+    display: block;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field label {
+    color: #3f2e1f;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.product-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}

@@ -1,0 +1,150 @@
+.orders-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.orders-container h1 {
+    color: #3f2e1f;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.order-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.order-header h3 {
+    color: #3f2e1f;
+    font-size: 1.5rem;
+}
+
+.status {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.status-pending {
+    background: #ffeaa7;
+    color: #d63031;
+}
+
+.status-confirmed {
+    background: #74b9ff;
+    color: #0984e3;
+}
+
+.status-preparing {
+    background: #a29bfe;
+    color: #6c5ce7;
+}
+
+.status-shipped {
+    background: #fdcb6e;
+    color: #e17055;
+}
+
+.status-delivered {
+    background: #55efc4;
+    color: #00b894;
+}
+
+.status-cancelled {
+    background: #fab1a0;
+    color: #d63031;
+}
+
+.order-info {
+    margin: 1rem 0;
+}
+
+.order-info p {
+    margin: 0.5rem 0;
+    color: #666;
+}
+
+.order-items {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.order-items h4 {
+    color: #3f2e1f;
+    margin-bottom: 1rem;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.order-total {
+    text-align: right;
+    font-size: 1.3rem;
+    color: #2d7a3e;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #f0f0f0;
+}
+
+.empty-orders {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-orders p {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.btn-shop {
+    padding: 1rem 2rem;
+    background: #6b4423;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-shop:hover {
+    background: #3f2e1f;
+}
+
+@media (max-width: 768px) {
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}

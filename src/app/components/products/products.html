@@ -1,0 +1,49 @@
+<div class="products-container">
+    <header class="products-header">
+        <h1>Catálogo de Productos</h1>
+        <div class="cart-icon">
+            <span class="cart-count">{{ cartItemCount }}</span>
+            🛒
+        </div>
+    </header>
+
+    <div class="filters">
+        <button [class.active]="selectedCategory === 'all'" (click)="filterByCategory('all')">
+            Todos
+        </button>
+        <button [class.active]="selectedCategory === 'coffee'" (click)="filterByCategory('coffee')">
+            Café
+        </button>
+        <button [class.active]="selectedCategory === 'tea'" (click)="filterByCategory('tea')">
+            Té
+        </button>
+        <button [class.active]="selectedCategory === 'accessories'" (click)="filterByCategory('accessories')">
+            Accesorios
+        </button>
+    </div>
+
+    <div class="products-grid">
+        <div class="product-card" *ngFor="let product of filteredProducts">
+            <img [src]="product.imageUrl" [alt]="product.name">
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p class="description">{{ product.description }}</p>
+                <p class="origin" *ngIf="product.origin">Origen: {{ product.origin }}</p>
+                <p class="roast" *ngIf="product.roastLevel">Tueste: {{ product.roastLevel }}</p>
+                <div class="product-footer">
+                    <span class="price">${{ product.price | number:'1.0-0' }}</span>
+                    <span class="stock" [class.low-stock]="product.stock < 10">
+                        Stock: {{ product.stock }}
+                    </span>
+                </div>
+                <button class="btn-add-cart" (click)="addToCart(product)" [disabled]="product.stock === 0">
+                    {{ product.stock === 0 ? 'Sin Stock' : 'Agregar al Carrito' }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-state" *ngIf="filteredProducts.length === 0">
+        <p>No hay productos disponibles en esta categoría</p>
+    </div>
+</div>

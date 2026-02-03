@@ -1,0 +1,57 @@
+<div class="cart-container">
+    <h1>Carrito de Compras</h1>
+
+    <div class="cart-content" *ngIf="cartItems.length > 0">
+        <div class="cart-items">
+            <div class="cart-item" *ngFor="let item of cartItems">
+                <img [src]="item.product.imageUrl" [alt]="item.product.name">
+                <div class="item-details">
+                    <h3>{{ item.product.name }}</h3>
+                    <p class="item-price">${{ item.product.price | number:'1.0-0' }}</p>
+                </div>
+                <div class="quantity-controls">
+                    <button (click)="decreaseQuantity(item.product.id)">-</button>
+                    <span>{{ item.quantity }}</span>
+                    <button (click)="increaseQuantity(item.product.id)">+</button>
+                </div>
+                <div class="item-total">
+                    <p>${{ (item.product.price * item.quantity) | number:'1.0-0' }}</p>
+                </div>
+                <button class="btn-remove" (click)="removeItem(item.product.id)">🗑️</button>
+            </div>
+        </div>
+
+        <div class="cart-summary">
+            <h2>Resumen del Pedido</h2>
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span>${{ total | number:'1.0-0' }}</span>
+            </div>
+            <div class="summary-row">
+                <span>Envío:</span>
+                <span>A calcular</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span>${{ total | number:'1.0-0' }}</span>
+            </div>
+
+            <div class="customer-form">
+                <h3>Datos de Entrega</h3>
+                <input type="text" [(ngModel)]="customerData.name" placeholder="Nombre completo" required>
+                <input type="email" [(ngModel)]="customerData.email" placeholder="Email" required>
+                <input type="tel" [(ngModel)]="customerData.phone" placeholder="Teléfono" required>
+                <textarea [(ngModel)]="customerData.address" placeholder="Dirección de entrega" rows="3"
+                    required></textarea>
+            </div>
+
+            <button class="btn-checkout" (click)="checkout()">Finalizar Compra</button>
+            <button class="btn-clear" (click)="clearCart()">Vaciar Carrito</button>
+        </div>
+    </div>
+
+    <div class="empty-cart" *ngIf="cartItems.length === 0">
+        <p>Tu carrito está vacío</p>
+        <button class="btn-shop" (click)="goToProducts()">Ir a Comprar</button>
+    </div>
+</div>
