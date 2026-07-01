@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product';
 import { CartService } from '../../services/cart';
@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './products.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './products.css'
 })
 export class ProductsComponent implements OnInit {

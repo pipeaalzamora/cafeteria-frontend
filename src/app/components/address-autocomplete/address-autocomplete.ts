@@ -8,7 +8,8 @@ import {
   Output,
   PLATFORM_ID,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { GoogleMapsLoader } from '../../services/google-maps-loader';
@@ -20,6 +21,7 @@ declare const google: any;
   standalone: true,
   imports: [],
   templateUrl: './address-autocomplete.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './address-autocomplete.css'
 })
 export class AddressAutocompleteComponent implements AfterViewInit, OnDestroy {

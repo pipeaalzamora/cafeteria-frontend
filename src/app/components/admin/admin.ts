@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { DashboardStats } from '../../models/stats.model';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './admin.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './admin.css'
 })
 export class AdminComponent implements OnInit {
