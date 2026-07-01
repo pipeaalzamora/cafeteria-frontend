@@ -1,20 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
 import { Product } from '../models/product.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   private cartItems: CartItem[] = [];
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
+  private isBrowser: boolean;
 
-  constructor() {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      this.cartItems = JSON.parse(savedCart);
-      this.cartSubject.next(this.cartItems);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
+    if (this.isBrowser) {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        this.cartItems = JSON.parse(savedCart);
+        this.cartSubject.next(this.cartItems);
+      }
     }
   }
 
@@ -24,13 +30,13 @@ export class CartService {
 
   addToCart(product: Product, quantity: number = 1): void {
     const existingItem = this.cartItems.find(item => item.product.id === product.id);
-    
+
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
       this.cartItems.push({ product, quantity });
     }
-    
+
     this.updateCart();
   }
 
@@ -65,7 +71,9 @@ export class CartService {
   }
 
   private updateCart(): void {
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    if (this.isBrowser) {
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    }
     this.cartSubject.next(this.cartItems);
   }
 }

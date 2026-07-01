@@ -27,13 +27,40 @@
                 <span>Subtotal:</span>
                 <span>${{ total | number:'1.0-0' }}</span>
             </div>
+
+            <div class="shipping-box">
+                <h3>Calcular Envío</h3>
+                <div class="shipping-quote-row">
+                    <input type="text" [(ngModel)]="destinationComuna" placeholder="Comuna de destino"
+                        name="destinationComuna">
+                    <button class="btn-quote" (click)="quoteShipping()" [disabled]="quoting">
+                        {{ quoting ? 'Cotizando...' : 'Cotizar' }}
+                    </button>
+                </div>
+
+                <p class="shipping-error" *ngIf="shippingError">{{ shippingError }}</p>
+
+                <div class="shipping-options" *ngIf="shippingOptions.length > 0">
+                    <label class="shipping-option" *ngFor="let opt of shippingOptions"
+                        [class.selected]="opt === selectedShipping">
+                        <input type="radio" name="shippingOption" [checked]="opt === selectedShipping"
+                            (change)="selectShipping(opt)">
+                        <span class="opt-info">
+                            <strong>{{ opt.courier }}</strong> · {{ opt.service }}
+                            <small *ngIf="opt.estimatedDays">({{ opt.estimatedDays }} días)</small>
+                        </span>
+                        <span class="opt-price">${{ opt.price | number:'1.0-0' }}</span>
+                    </label>
+                </div>
+            </div>
+
             <div class="summary-row">
                 <span>Envío:</span>
-                <span>A calcular</span>
+                <span>{{ selectedShipping ? ('$' + (shippingCost | number:'1.0-0')) : 'A calcular' }}</span>
             </div>
             <div class="summary-row total">
                 <span>Total:</span>
-                <span>${{ total | number:'1.0-0' }}</span>
+                <span>${{ grandTotal | number:'1.0-0' }}</span>
             </div>
 
             <div class="customer-form">
@@ -41,8 +68,9 @@
                 <input type="text" [(ngModel)]="customerData.name" placeholder="Nombre completo" required>
                 <input type="email" [(ngModel)]="customerData.email" placeholder="Email" required>
                 <input type="tel" [(ngModel)]="customerData.phone" placeholder="Teléfono" required>
-                <textarea [(ngModel)]="customerData.address" placeholder="Dirección de entrega" rows="3"
-                    required></textarea>
+                <app-address-autocomplete [value]="customerData.address"
+                    (addressChange)="customerData.address = $event"
+                    (addressSelected)="customerData.address = $event"></app-address-autocomplete>
             </div>
 
             <button class="btn-checkout" (click)="checkout()">Finalizar Compra</button>

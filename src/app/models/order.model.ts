@@ -7,6 +7,9 @@ export interface Order {
   customerPhone: string;
   customerAddress: string;
   items: CartItem[];
+  shippingCost?: number;
+  shippingCourier?: string;
+  shippingService?: string;
   totalAmount: number;
   status: OrderStatus;
   createdAt?: Date;

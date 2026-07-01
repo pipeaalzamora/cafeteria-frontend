@@ -1,0 +1,10 @@
+<input
+  #addressInput
+  type="text"
+  class="address-autocomplete-input"
+  [value]="value"
+  [placeholder]="placeholder"
+  (input)="onInput(addressInput.value)"
+  autocomplete="off"
+  required
+/>
